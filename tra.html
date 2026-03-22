@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { 
+  font-family: Arial; 
+  text-align: center; 
+}
+
+input{
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+button{background: blue;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: 16px;
+  border-radius: 10px;
+  width: 100px;
+  height: 38px;}
+  button:hover{background: rgb(38, 139, 240);
+    cursor: pointer;
+  transition: 1s;}
+
+.tracker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center horizontally */
+  margin-top: 20px;
+}
+
+.step {
+  position: relative;
+  padding: 10px 20px;
+  margin: 0;
+  border-radius: 20px;
+  background: lightgray;
+  color: white;
+  width: 160px;
+  text-align: center;
+}
+
+.active {
+  background: green;
+}
+
+.line {
+  width: 4px;
+  height: 30px;
+  background: lightgray;
+  margin: 5px 0; /* space between steps */
+}
+
+.active-line {
+  background: green;
+}
+
+.step-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center tracker */
+}
+</style>
+</head>
+
+<body>
+
+<h2 style="color: green;">Track Status</h2>
+
+<input type="text" id="empId" placeholder="Enter ID">
+<br>
+<button onclick="track()">Track</button>
+
+<div id="tracker" class="tracker-container"></div>
+
+<p id="remark"></p>
+
+<script>
+const URL = "https://script.google.com/macros/s/AKfycbwSMkB0Nk8Bsr6bDGpSBkIvwEQMMTTVnTOQxA_dwlXuD2kUKRihEHPhQNza3w8snfPs/exec";
+
+const steps = ["Prepared","Dispatch","Shipped","Out for Delivery","Delivered"];
+
+function track() {
+  const id = document.getElementById("empId").value;
+
+  fetch(URL + "?action=track&empId=" + id)
+  .then(res => res.json())
+  .then(data => showSteps(data.status, data.remark));
+}
+
+function showSteps(current, remark) {
+  let html = '<div class="step-wrapper">';
+  let currentIndex = steps.indexOf(current);
+
+  steps.forEach((step, i) => {
+    html += `<div class="step ${i <= currentIndex ? 'active' : ''}">${step}</div>`;
+
+    if (i < steps.length - 1) {
+      html += `<div class="line ${i < currentIndex ? 'active-line' : ''}"></div>`;
+    }
+  });
+
+  html += '</div>';
+
+  document.getElementById("tracker").innerHTML = html;
+  document.getElementById("remark").innerText = "Remark: " + remark;
+}
+</script>
+
+</body>
+</html>

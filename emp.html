@@ -67,10 +67,25 @@
     <a href="upi://pay?pa=sk6995554@okhdfcbank&pn=SarveshKumar&am=100.00&cu=INR&tn=Smart%20Card" target="_blank">Click Me</a>
   </p>
 
-  <label>Payment Done?</label><br><br>
+  <label>Payment Done?</label>
   <select id="payment" name="payment" required>
     <option value="Yes">Yes</option>
     <option value="No" selected>No</option>
+  </select>
+  
+  <br><br>
+  
+  <label>FOs / AOs / AMs / Mgr Name</label>
+  <select id="foname" name="foname" required>
+                <option value="" selected>Select Name</option>
+                <option value="Mr. Babaram Surve">Mr. Babaram Surve</option>
+                <option value="Mr. Babaram Surve">Mr. Kaushik Acharya</option>
+                <option value="Mr. Balaji Ghodake">Mr. Balaji Ghodake</option>
+                <option value="Mr. Manoj Palande">Mr. Manoj Palande</option>
+                <option value="Mr. Shivling Khabile">Mr. Shivling Khabile</option>
+                <option value="Mr. Suresh Math">Mr. Suresh Math</option>
+                <option value="Mr. Atul Thombre">Mr. Atul Thombre</option>
+                <option value="Mr. Ramchandra Painkara">Mr. Ramchandra Painkara</option>
   </select>
 
   <label>Upload Payment Screenshot</label>
@@ -156,6 +171,7 @@ function submitForm() {
         name: emp.name,
         email: emp.email,
         paymentStatus: document.getElementById("payment").value,
+        fieldstaff: document.getElementById("foname").value,
         fileData: base64,
         mimeType: file.type,
         fileName: file.name

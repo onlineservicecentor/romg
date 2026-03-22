@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Admin Panel</h2>
+
+<input type="password" id="pass" placeholder="Password"><br><br>
+
+<input type="text" id="empId" placeholder="Employee ID"><br><br>
+
+<select id="status">
+  <option>Prepared</option>
+  <option>Dispatch</option>
+  <option>Shipped</option>
+  <option>Out for Delivery</option>
+  <option>Delivered</option>
+</select><br><br>
+
+<input type="text" id="remark" placeholder="Remark"><br><br>
+
+<button onclick="update()">Update</button>
+
+<p id="msg"></p>
+
+<script>
+const URL = "https://script.google.com/macros/s/AKfycbwSMkB0Nk8Bsr6bDGpSBkIvwEQMMTTVnTOQxA_dwlXuD2kUKRihEHPhQNza3w8snfPs/exec";
+
+function update() {
+  const id = document.getElementById("empId").value;
+  const status = document.getElementById("status").value;
+  const remark = document.getElementById("remark").value;
+  const pass = document.getElementById("pass").value;
+
+  fetch(URL + "?action=update&empId=" + id + "&status=" + status + "&remark=" + remark + "&pass=" + pass)
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("msg").innerText = data;
+  });
+}
+</script>
+
+</body>
+</html>

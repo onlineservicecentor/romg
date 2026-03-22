@@ -64,17 +64,17 @@
 <div id="apply" style="display:none;">
   <p>
     <b>Payment Link:</b><br>
-    <a href="upi://pay?pa=sk6995554@okhdfcbank&pn=SarveshKumar&am=100.00&cu=INR&tn=Smart%20Card" target="_blank">Click here to Pay</a>
+    <a href="upi://pay?pa=sk6995554@okhdfcbank&pn=SarveshKumar&am=100.00&cu=INR&tn=Smart%20Card" target="_blank">Click Me</a>
   </p>
 
-  <label>Payment Done?</label>
-  <select id="payment">
+  <label>Payment Done?</label><br><br>
+  <select id="payment" name="payment" required>
     <option value="Yes">Yes</option>
-    <option value="No">No</option>
+    <option value="No" selected>No</option>
   </select>
 
   <label>Upload Payment Screenshot</label>
-  <input type="file" id="file">
+  <input type="file" id="file" required>
 
   <button onclick="submitForm()">Submit Application</button>
 </div>
